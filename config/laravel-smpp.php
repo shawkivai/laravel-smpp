@@ -38,12 +38,12 @@ return [
     'default' => env('SMPP_DEFAULT_PROVIDER'),
 
     'providers' => [
-        'example' => [
-            'host' => 'localhost',
-            'port' => 9999,
-            'timeout' => 90,
-            'login' => 'login',
-            'password' => 'password'
+        'smpp-simulator' => [
+            'host' => env('SMPP_HOST'),
+            'port' => env('SMPP_PORT'),
+            'timeout' => 900,
+            'login' => env('SMPP_USERNAME'),
+            'password' => env('SMPP_PASSWORD')
         ]
     ],
 
@@ -60,7 +60,9 @@ return [
     'transport' => [
         'catchables' => [
             SMPP::ESME_RBINDFAIL,
-            SMPP::ESME_RINVCMDID
+            SMPP::ESME_RINVCMDID,
+            SMPP::ESME_RINVSRCADR,
+            SMPP::ESME_RINVDSTADR
         ],
         'force_ipv4' => true,
         'debug' => false
@@ -75,6 +77,6 @@ return [
     'client' => [
         'system_type' => 'default',
         'null_terminate_octetstrings' => false,
-        'debug' => false
+        'debug' => true
     ]
 ];
